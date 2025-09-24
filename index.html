@@ -19,7 +19,7 @@
                 <li><a href="index.html">Home</a></li>
                 <li>|</li>
                 <li class="dropdown">
-                    <a href="#" onclick="toggleDropdown()">Items <i class="fa-solid fa-caret-down"></i></a>
+                    <a href="#" onclick="toggleDropdown()">Items <i class="fa fa-caret-down"></i></a>
                     <ul id="itemsDropdown" class="dropdown-content">
                         <li><a href="#">Handmade Bags</a></li>
                         <li><a href="#">Decor Items</a></li>
@@ -27,18 +27,24 @@
                         <li><a href="#">Home Essentials</a></li>
                     </ul>
                 </li>
+
                 <li>|</li>
-                <li><a href="#">About Us</a></li>
+                <li><a href="about.html">About Us</a></li>
                 <li>|</li>
                 <li><a href="#" onclick="openContact()">Contact Us</a></li>
                 <li>|</li>
                 <li><a href="#">Featured</a></li>
             </ul>
         </div>
-        <div class="login">
-            <button class="login" onclick="openLogin()">Login</button>
+        <div class="nav-right">
+            <div class="cart">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span id="cart-count">0</span>
+            </div>
+            <div class="login">
+                <button class="login" onclick="openLogin()"><i class="fa-solid fa-user"></i></button>
+            </div>
         </div>
-
     </div>
     
 
@@ -64,7 +70,7 @@
                 <img src="assets/resell-img.jpg">
                 <h4 class="card-head">Re-sell here</h4>
                 <p class="card-para">Got gently used items that deserve a second home? Connect with like-minded buyers...</p>
-                <button class="btn btn-green-outline">Explore Re-sell <i class="fa-solid fa-recycle"></i></button>
+                <button class="btn btn-green-outline" onclick="openResell()">Explore Re-sell <i class="fa-solid fa-recycle"></i></button>
             </div>
         </div>
 
@@ -95,6 +101,7 @@
             <input type="password" id="modalPassword" placeholder="Password">
             <div id="modalError" class="error"></div>
             <button onclick="validateModalLogin()">Login</button>
+            <button class="sign-in-btn">Sign In</button>
             <button class="close-btn" onclick="closeLogin()">Close</button>
         </div>
     </div>
@@ -114,21 +121,37 @@
         </div>
     </div>
 
-    <!-- Seller Registration Modal -->
-    <div id="sellerModal" class="seller-modal">
-        <div class="seller-card">
-            <h2>Join as a Seller</h2>
+    <!-- Seller Modal -->
+    <div id="sellerModal" class="modal">
+        <div class="modal-card">
+            <h2>Join as Seller</h2>
             <form id="sellerForm">
-                <input type="text" id="sellerName" placeholder="Full Name" required>
-                <input type="email" id="sellerEmail" placeholder="Email" required>
-                <input type="text" id="sellerPhone" placeholder="Phone Number" required>
-                <input type="text" id="sellerBusiness" placeholder="Business/Shop Name" required>
-                <textarea id="sellerProducts" rows="4" placeholder="Products You Sell" required></textarea>
-                
-                <button type="submit">Register</button>
-                <button type="button" class="close-btn" onclick="closeSeller()">Close</button>
+            <input type="text" id="sellerName" placeholder="Name" required>
+            <input type="email" id="sellerEmail" placeholder="Email" required>
+            <input type="tel" id="sellerPhone" placeholder="Phone" required>
+            <input type="text" id="sellerBusiness" placeholder="Business Name" required>
+            <textarea id="sellerProducts" placeholder="Products" required></textarea>
+            <button type="submit">Submit</button>
+            <button type="button" class="close-btn" onclick="closeSeller()">Close</button>
             </form>
-            <div id="sellerMsg" class="seller-message"></div>
+            <div id="sellerMsg"></div>
+        </div>
+    </div>
+
+    <!-- Resell Modal -->
+    <div id="resellModal" class="modal">
+        <div class="modal-card">
+            <h2>Join as Re-Seller</h2>
+            <form id="resellForm">
+            <input type="text" id="resellName" placeholder="Name" required>
+            <input type="email" id="resellEmail" placeholder="Email" required>
+            <input type="tel" id="resellPhone" placeholder="Phone" required>
+            <input type="text" id="resellBusiness" placeholder="Business Name" required>
+            <textarea id="resellProducts" placeholder="Products" required></textarea>
+            <button type="submit">Submit</button>
+            <button type="button" class="close-btn" onclick="closeResell()">Close</button>
+            </form>
+            <div id="resellMsg"></div>
         </div>
     </div>
 
@@ -148,7 +171,7 @@
             <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="#about-section">About Us</a></li>
+                <li><a href="about.html">About Us</a></li>
                 <li><a href="shop-now.html">Shop Now</a></li>
                 <li><a href="#" onclick="openSeller()">Join as Seller</a></li>
                 <li><a href="#" onclick="openContact()">Contact Us</a></li>
