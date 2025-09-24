@@ -10,10 +10,6 @@ body {
 
 /* navbar */
 .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1000;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -22,12 +18,20 @@ body {
     background-color:#4F6F52;
     border-bottom: 2px solid rgba(00,00,00,0.1);
     padding: 0 30px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
     box-shadow: 0.1px 0.1px 50px rgba(0, 0, 0, 0.25);
 }
 
 .logo img {
     height: 92px;
     width: 300px;
+}
+
+.nav-items {
+    align-self: flex-end;
 }
 
 .nav-items ul{
@@ -49,19 +53,47 @@ body {
     text-decoration: underline;
 }
 
-.nav-items {
-    align-self: flex-end;
-    color: #4F6F52;
+/* === Cart Icon in Navbar === */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem; /* space between cart and login */
+}
+
+/* Cart styles */
+.cart {
+  position: relative;
+  font-size: 1.2rem;
+  color: #ECE3CE;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 700;
+}
+
+.cart:hover {
+  color:#3A4D39;
+}
+
+#cart-count {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #739072;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  border-radius: 50%;
+  padding: 2px 6px;
 }
 
 .login {
     height: 40px;
-    width: 100px;
+    width: 80px;
     border-radius: 90px;
     border: none;
     color: #ECE3CE;
     background-color:#3A4D39;
-    font-size: 1.2rem;
+    font-size: 1.6rem;
     font-weight: 600;
 }
 
@@ -69,7 +101,6 @@ body {
     background-color:#ECE3CE;
     color: #3A4D39;
     height: 39px;
-    width: 99px;
 }
 
 /* Dropdown container */
@@ -79,15 +110,18 @@ body {
 
 /* Dropdown menu */
 .dropdown-content {
-    display: none;
     position: absolute;
-    background-color: #ECE3CE;
+    background-color:#ECE3CE;
     min-width: 180px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
     top: 35px;
     left: 0;
     z-index: 1000;
+    display: none; /* hidden by default */
+}
+.dropdown-content.show {
+    display: block; /* when JS adds 'show', it becomes visible */
 }
 
 
@@ -97,7 +131,6 @@ body {
 }
 
 .dropdown-content a {
-    color: #3A4D39;
     padding: 10px 20px;
     text-decoration: none;
     display: block;
@@ -415,33 +448,13 @@ body {
 }
 
 .shop-search {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 20px 0;
-}
-
-.shop-search input {
-    width: 400px;
-    padding: 10px 15px;
-    border: 1px solid #ccc;
-    border-radius: 25px 0 0 25px;
-    font-size: 1rem;
-    outline: none;
-}
-
-.shop-search button {
-    padding: 10px 20px;
-    border: none;
-    background-color: #3A4D39;
+    font-size: 1.2rem;
     color: #ECE3CE;
-    border-radius: 0 25px 25px 0;
-    cursor: pointer;
-    font-size: 1rem;
+    font-weight: 700;
 }
 
-.shop-search button:hover {
-    background-color: #4F6F52;
+.shop-search:hover {
+    color: #3A4D39;
 }
 
 /* shop-now body */
@@ -470,6 +483,15 @@ body {
     color: #3A4D39;
 }
 
+.body-items a {
+    text-decoration: none;
+}
+
+.body-items a:hover {
+    text-decoration: underline;
+    color: #3A4D39;
+}
+
 .shop-item {
     display: flex;
     justify-content: space-evenly;
@@ -477,7 +499,7 @@ body {
 }
 
 .shop-items img {
-    height: 280px;
+    height: 320px;
     width: 250px;
     border-radius: 10px;
 }
@@ -487,8 +509,16 @@ body {
     text-align: center;
 }
 
-/* Seller Modal Styles */
-.seller-modal {
+.dropdown-content {
+    background-color:#ECE3CE;
+}
+
+.dropdown-content a {
+    color: #3A4D39;
+}
+
+/* Common Modal Background */
+.modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -501,7 +531,8 @@ body {
     z-index: 2000;
 }
 
-.seller-card {
+/* Common Modal Card */
+.modal-card {
     background-color: #ECE3CE;
     padding: 30px;
     border-radius: 20px;
@@ -511,13 +542,14 @@ body {
     text-align: center;
 }
 
-.seller-card h2 {
+.modal-card h2 {
     color: #3A4D39;
     margin-bottom: 20px;
 }
 
-.seller-card input,
-.seller-card textarea {
+/* Form elements inside modal */
+.modal-card input,
+.modal-card textarea {
     width: 100%;
     padding: 12px 15px;
     margin-bottom: 15px;
@@ -527,7 +559,16 @@ body {
     outline: none;
 }
 
-.seller-card button {
+/* Make textareas start at top-left */
+.modal-card textarea {
+    height: 100px;
+    text-align: left;
+    vertical-align: top;
+    padding-top: 12px;  /* ensures placeholder and text stay at the top */
+    resize: vertical;   /* allow only vertical resizing */
+}
+
+.modal-card button {
     width: 100%;
     padding: 12px;
     border: none;
@@ -539,27 +580,29 @@ body {
     margin-bottom: 10px;
 }
 
-.seller-card button:hover {
+.modal-card button:hover {
     background-color: #4F6F52;
 }
 
-.seller-card .close-btn {
-    background-color: transparent;
-    color: #3A4D39;
-    border: 1px solid #3A4D39;
+.modal-card button.close-btn {
+    background: #ccc;
+    color: black;
 }
 
-.seller-card .close-btn:hover {
+.modal-card .close-btn:hover {
     background-color: #4F6F52;
     color: #ECE3CE;
     border: 1px solid #4F6F52;
 }
 
-.seller-message {
+.modal-message {
     color: green;
     font-size: 0.9rem;
     margin-top: 10px;
 }
+
+
+
 
 /* footer */
 .site-footer {
@@ -675,7 +718,7 @@ body {
 
 
 
-/* RESPONSIVE STYLES */
+/* RESPONSIVE STYLES
 @media (max-width: 1200px) {
     .nav-items ul,
     .nav-bar ul {
@@ -869,4 +912,4 @@ body {
     #newsletterForm button {
         font-size: 0.9rem;
     }
-}
+} */
